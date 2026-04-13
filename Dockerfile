@@ -44,7 +44,9 @@ RUN cd /ComfyUI/custom_nodes && \
     git clone https://github.com/judian17/ComfyUI-PixelSmile-Conditioning-Interpolation && \
     git clone https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes && \
     git clone https://github.com/WASasquatch/was-node-suite-comfyui && \
-    git clone https://github.com/RamonGuthrie/ComfyUI-RBG-SmartSeedVariance && \
+    git clone https://github.com/ChangeTheConstants/SeedVarianceEnhancer && \
+    git clone https://github.com/gseth/ControlAltAI-Nodes && \
+    git clone https://github.com/yolain/ComfyUI-Easy-Use && \
     git clone https://github.com/vrgamegirl19/comfyui-vrgamedevgirl && \
     git clone https://github.com/moonwhaler/comfyui-moonpack && \
     git clone https://github.com/M1kep/ComfyLiterals
