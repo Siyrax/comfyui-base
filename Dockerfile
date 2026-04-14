@@ -49,7 +49,11 @@ RUN cd /ComfyUI/custom_nodes && \
     git clone https://github.com/yolain/ComfyUI-Easy-Use && \
     git clone https://github.com/vrgamegirl19/comfyui-vrgamedevgirl && \
     git clone https://github.com/moonwhaler/comfyui-moonpack && \
-    git clone https://github.com/M1kep/ComfyLiterals
+    git clone https://github.com/M1kep/ComfyLiterals && \
+    git clone https://github.com/pythongosssss/ComfyUI-Custom-Scripts && \
+    git clone https://github.com/chflame163/ComfyUI_LayerStyle && \
+    git clone https://github.com/ClownsharkBatwing/RES4LYF && \
+    git clone https://github.com/1038lab/ComfyUI-QwenVL
 
 # Install all custom node requirements
 RUN for dir in /ComfyUI/custom_nodes/*/; do \
