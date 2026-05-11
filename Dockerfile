@@ -18,42 +18,43 @@ RUN pip install -U pip setuptools wheel && \
 WORKDIR /
 
 # Fresh ComfyUI
-RUN git clone https://github.com/comfyanonymous/ComfyUI.git && \
+RUN git clone --depth 1 https://github.com/comfyanonymous/ComfyUI.git && \
     cd /ComfyUI && pip install -r requirements.txt
 
-# Clone ALL custom nodes
+# Clone all custom nodes required by the 11 production workflows.
+# Removed 2026-05-11 (audited unused across all workflows):
+#   - PowerHouseMan/ComfyUI-AdvancedLivePortrait  (~300 MB, mediapipe)
+#   - WASasquatch/was-node-suite-comfyui          (~800 MB, transformers+git deps)
+#   - M1kep/ComfyLiterals                         (no requirements.txt; literals)
+#   - chflame163/ComfyUI_LayerStyle               (~1 GB, PIL plugins + seg models)
+#   - 1038lab/ComfyUI-QwenVL                      (TextEncodeQwenImageEditPlus is core)
 RUN cd /ComfyUI/custom_nodes && \
-    git clone https://github.com/Comfy-Org/ComfyUI-Manager.git && \
-    git clone https://github.com/kijai/ComfyUI-WanVideoWrapper && \
-    git clone https://github.com/kijai/ComfyUI-WanAnimatePreprocess && \
-    git clone https://github.com/Lightricks/ComfyUI-LTXVideo && \
-    git clone https://github.com/Kosinkadink/ComfyUI-VideoHelperSuite && \
-    git clone https://github.com/numz/ComfyUI-SeedVR2_VideoUpscaler && \
-    git clone https://github.com/kijai/ComfyUI-KJNodes && \
-    git clone https://github.com/city96/ComfyUI-GGUF && \
-    git clone https://github.com/calcuis/gguf && \
-    git clone https://github.com/kijai/ComfyUI-segment-anything-2 && \
-    git clone https://github.com/kijai/ComfyUI-Florence2 && \
-    git clone https://github.com/Fannovel16/comfyui_controlnet_aux && \
-    git clone https://github.com/ltdrdata/ComfyUI-Impact-Pack && \
-    git clone https://github.com/ltdrdata/ComfyUI-Impact-Subpack && \
-    git clone https://github.com/rgthree/rgthree-comfy && \
-    git clone https://github.com/sipherxyz/comfyui-art-venture && \
-    git clone https://github.com/PowerHouseMan/ComfyUI-AdvancedLivePortrait && \
-    git clone https://github.com/1038lab/ComfyUI-JoyCaption && \
-    git clone https://github.com/judian17/ComfyUI-PixelSmile-Conditioning-Interpolation && \
-    git clone https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes && \
-    git clone https://github.com/WASasquatch/was-node-suite-comfyui && \
-    git clone https://github.com/ChangeTheConstants/SeedVarianceEnhancer && \
-    git clone https://github.com/gseth/ControlAltAI-Nodes && \
-    git clone https://github.com/yolain/ComfyUI-Easy-Use && \
-    git clone https://github.com/vrgamegirl19/comfyui-vrgamedevgirl && \
-    git clone https://github.com/moonwhaler/comfyui-moonpack && \
-    git clone https://github.com/M1kep/ComfyLiterals && \
-    git clone https://github.com/pythongosssss/ComfyUI-Custom-Scripts && \
-    git clone https://github.com/chflame163/ComfyUI_LayerStyle && \
-    git clone https://github.com/ClownsharkBatwing/RES4LYF && \
-    git clone https://github.com/1038lab/ComfyUI-QwenVL
+    git clone --depth 1 https://github.com/Comfy-Org/ComfyUI-Manager.git && \
+    git clone --depth 1 https://github.com/kijai/ComfyUI-WanVideoWrapper && \
+    git clone --depth 1 https://github.com/kijai/ComfyUI-WanAnimatePreprocess && \
+    git clone --depth 1 https://github.com/Lightricks/ComfyUI-LTXVideo && \
+    git clone --depth 1 https://github.com/Kosinkadink/ComfyUI-VideoHelperSuite && \
+    git clone --depth 1 https://github.com/numz/ComfyUI-SeedVR2_VideoUpscaler && \
+    git clone --depth 1 https://github.com/kijai/ComfyUI-KJNodes && \
+    git clone --depth 1 https://github.com/city96/ComfyUI-GGUF && \
+    git clone --depth 1 https://github.com/calcuis/gguf && \
+    git clone --depth 1 https://github.com/kijai/ComfyUI-segment-anything-2 && \
+    git clone --depth 1 https://github.com/kijai/ComfyUI-Florence2 && \
+    git clone --depth 1 https://github.com/Fannovel16/comfyui_controlnet_aux && \
+    git clone --depth 1 https://github.com/ltdrdata/ComfyUI-Impact-Pack && \
+    git clone --depth 1 https://github.com/ltdrdata/ComfyUI-Impact-Subpack && \
+    git clone --depth 1 https://github.com/rgthree/rgthree-comfy && \
+    git clone --depth 1 https://github.com/sipherxyz/comfyui-art-venture && \
+    git clone --depth 1 https://github.com/1038lab/ComfyUI-JoyCaption && \
+    git clone --depth 1 https://github.com/judian17/ComfyUI-PixelSmile-Conditioning-Interpolation && \
+    git clone --depth 1 https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes && \
+    git clone --depth 1 https://github.com/ChangeTheConstants/SeedVarianceEnhancer && \
+    git clone --depth 1 https://github.com/gseth/ControlAltAI-Nodes && \
+    git clone --depth 1 https://github.com/yolain/ComfyUI-Easy-Use && \
+    git clone --depth 1 https://github.com/vrgamegirl19/comfyui-vrgamedevgirl && \
+    git clone --depth 1 https://github.com/moonwhaler/comfyui-moonpack && \
+    git clone --depth 1 https://github.com/pythongosssss/ComfyUI-Custom-Scripts && \
+    git clone --depth 1 https://github.com/ClownsharkBatwing/RES4LYF
 
 # Install all custom node requirements
 RUN for dir in /ComfyUI/custom_nodes/*/; do \
@@ -62,3 +63,8 @@ RUN for dir in /ComfyUI/custom_nodes/*/; do \
         pip install -r "$dir/requirements.txt" || true; \
       fi; \
     done
+
+# Strip git history and bytecode caches we just created
+RUN find /ComfyUI/custom_nodes -type d -name .git -exec rm -rf {} + 2>/dev/null || true && \
+    find /ComfyUI -type d -name __pycache__ -exec rm -rf {} + 2>/dev/null || true && \
+    find /ComfyUI -type f -name "*.pyc" -delete 2>/dev/null || true
